@@ -2,7 +2,7 @@
 //bootstrap Link :https://react-bootstrap.github.io/components.html#forms
 import React,{Component} from 'react';
 import  './SignUp_css.css';
-
+import FundTransfer from './FundTransfer.js'
 import { Button } from 'react-bootstrap';
 // import InputGroup from 'react-bootstrap';
 // import FormControl from 'react-bootstrap';
@@ -17,36 +17,48 @@ constructor(){
         password:'',
         cPassword:''
     },
+    showLogin : false,
     fields:[],
     error:'this is error'
   }
 }
 
 successMessage(event){
-    debugger;
+    alert('one')
+    // debugger;
     this.state.fields.push(this.state.myInfo);
     this.setState({
         fields : this.state.fields
     })
+    this.handleSubmit();
     event.preventDefault();
 }
-
 inputChange(changeValue,event){
  
     this.state.myInfo[changeValue] = event.target.value;
 this.setState({
         myInfo : this.state.myInfo
     });
+}
+handleSubmit(){
+  if (this.state.myInfo.fName=="admin"){
+     if (this.state.myInfo.password=="admin") {
+         console.log("here ");
 
+         this.setState({showLogin : true});
+    }
 }
 
+}
 render(){
 return(
    <div>
-      <form className="signUp_css">  
+       { this.state.showLogin ? <FundTransfer/> : 
+       
+             <form className="signUp_css" onSubmit={this.handleSubmit}>  
 
             <br></br>
-            <label><b>User Name</b></label>
+            <label class="uName"><b>User Name</b></label>
             <input className="inputField" type="text" value={this.state.myInfo.fName} onChange={this.inputChange.bind(this,"fName")}
             required={true}
             minLength={4}
@@ -55,10 +67,10 @@ return(
             <br></br>
             
             <br></br>
-            <label><b>Password</b></label>
+            <label class="uPass"><b>Password</b></label>
             <input type="password" value={this.state.myInfo.password} onChange={this.inputChange.bind(this,"password")} 
             required={true}
-            minLength={6}
+            minLength={5}
            maxLength={18} 
             />
             <br></br>
@@ -66,9 +78,11 @@ return(
             <br></br>
           
             <Button bsStyle="primary" onClick={this.successMessage.bind(this)}><b>Login</b></Button>
-       </form>
+       </form >
 
-      
+       
+        }
+
 
    </div>
 )

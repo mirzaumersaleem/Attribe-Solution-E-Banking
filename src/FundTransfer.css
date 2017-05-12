@@ -1,0 +1,12 @@
+.FundTransfer{
+    background-color: #2C3E50;
+}
+
+#AccountLabel{
+   color: #000000;
+   display: inline-block;
+   clear: left;
+   width: 250px;
+   text-align: justify;
+   border: saddlebrown;
+}
